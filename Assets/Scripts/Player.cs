@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     public bool facingRight = true;
     Vector2 scaleDefault;
     void Awake()
-    {
+    {   
+        //b
         Main = this;
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
