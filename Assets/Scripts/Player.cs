@@ -46,19 +46,7 @@ public class Player : MonoBehaviour
 
         bool l = CheckGround(left), c = CheckGround(center), r = CheckGround(right);
 
-        if (l && c && r) {
-            return true;
-        }
-
-        if (l && c) {
-            return true;
-        }
-
-        if (c && r) {
-            return true;
-        }
-
-        if (!l && c && !r) {
+        if (l || c || r) {
             return true;
         }
 
