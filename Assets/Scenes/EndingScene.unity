@@ -510,7 +510,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Project Manager\n\ncreated by minsu \n\nfkdjkjfkjas\nf\ndsf\nsadfasdfdfdfsdfsf\nfddfasfd\nfaf\nasdfdsf\ndsfs\nfsfsafdfadsfdsfdgvebgeberhbtjhgefghj\nfmyhgdfghhmgfdfacvgbnfhmgjhnfbdfdsg\ns\nffdfsvgbfngmhngdbv\nbs\nangfhmnfdvbfnffgbdvsbngfbdsfvnf\ngvsrhgefgrnthrgefghrt\ngnt\nrfegrntfwgebrntgmnrgbhrntmytgefwgbntgmn\nfngtgfdfwgehrntggfdfgngmngfgebhrfngmegwf\ngehrntegfwgerntgmrgfwegbrngh
+  m_Text: "Project Manager\n\ncreated by minsu \n\n\uAE40\uBBFC\uC218\uC758 \uAE43\uD5C8\uBE0C\uB97C
+    \uACE0\uCCD0\uC8FC\uC2E0 \uC720\uCC44\uD638\uC5D0\uAC8C \uAC10\uC0AC\uC778\uC0AC
+    \uC804\uD569\uB2C8\uB2E4 \nfkdjkjfkjas\nf\ndsf\nsadfasdfdfdfsdfsf\nfddfasfd\nfaf\nasdfdsf\ndsfs\nfsfsafdfadsfdsfdgvebgeberhbtjhgefghj\nfmyhgdfghhmgfdfacvgbnfhmgjhnfbdfdsg\ns\nffdfsvgbfngmhngdbv\nbs\nangfhmnfdvbfnffgbdvsbngfbdsfvnf\ngvsrhgefgrnthrgefghrt\ngnt\nrfegrntfwgebrntgmnrgbhrntmytgefwgbntgmn\nfngtgfdfwgehrntggfdfgngmngfgebhrfngmegwf\ngehrntegfwgerntgmrgfwegbrngh
     grefwegbrfngnefwvebf \nfdwcfsvddqwcsvd \ndwcs\ndcdv\ndw"
 --- !u!222 &2119073792
 CanvasRenderer:
