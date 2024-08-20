@@ -46,26 +46,26 @@ public class Movement : MonoBehaviour
         isMoving = false;
         
         if (canMove) {
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(-speed * Time.deltaTime, 0, 0);
                 isMoving = true;
 
                 pl.facingRight = false;
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            else if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(speed * Time.deltaTime, 0, 0);
                 isMoving = true;
 
                 pl.facingRight = true;
             }
-            else if (Input.GetKey(KeyCode.UpArrow))
+            else if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(0, 0, speed * Time.deltaTime);
                 isMoving = true;
             }
-            else if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(0, 0, -speed * Time.deltaTime);
                 isMoving = true;

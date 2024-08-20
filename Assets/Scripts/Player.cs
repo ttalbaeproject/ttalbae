@@ -40,9 +40,9 @@ public class Player : MonoBehaviour
 
     public bool OnGround() {
 
-        RaycastHit2D[] center = Physics2D.RaycastAll(transform.position + new Vector3(0, -0.8f), Vector2.down, 0.2f);
-        RaycastHit2D[] left = Physics2D.RaycastAll(transform.position + new Vector3(-0.3f, -0.8f), Vector2.down, 0.2f);
-        RaycastHit2D[] right = Physics2D.RaycastAll(transform.position + new Vector3(0.3f, -0.8f), Vector2.down, 0.2f);
+        RaycastHit2D[] center = Physics2D.RaycastAll(transform.position + new Vector3(0, -0.6f), Vector2.down, 0.2f);
+        RaycastHit2D[] left = Physics2D.RaycastAll(transform.position + new Vector3(-0.3f, -0.6f), Vector2.down, 0.2f);
+        RaycastHit2D[] right = Physics2D.RaycastAll(transform.position + new Vector3(0.3f, -0.6f), Vector2.down, 0.2f);
 
         bool l = CheckGround(left), c = CheckGround(center), r = CheckGround(right);
 
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawLine(transform.position + new Vector3(0, -0.8f), transform.position + new Vector3(0, -1f));
+        Gizmos.DrawLine(transform.position + new Vector3(0, -0.6f), transform.position + new Vector3(0, -0.8f));
 
         Gizmos.DrawLine(transform.position + new Vector3(0.3f, -0.8f), transform.position + new Vector3(0.3f, -1f));
         Gizmos.DrawLine(transform.position + new Vector3(-0.3f, -0.8f), transform.position + new Vector3(-0.3f, -1f));
