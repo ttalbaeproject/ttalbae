@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
             actionText.text = "";
         }
 
-        heightText.text = Mathf.Floor(Player.Main.transform.position.y + 6).ToString() + "M";
+        heightText.text = Mathf.Floor(Player.Main.transform.position.y + 7).ToString() + "M";
     }
 
     public void SetActionText(string txt, Color col, bool overrid = true) {
