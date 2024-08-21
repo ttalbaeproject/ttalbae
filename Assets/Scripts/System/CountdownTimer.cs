@@ -7,10 +7,12 @@ public class CountdownTimer : MonoBehaviour
     public Text countdownText;
     private float timeRemaining = 120f;
     private bool timerIsRunning = false;
+    public GameObject panel;
 
     void Start()
     {
         timerIsRunning = true;
+        panel.SetActive(false);
         UpdateCountdownText();
     }
 
@@ -27,6 +29,7 @@ public class CountdownTimer : MonoBehaviour
             {
                 // 타이머가 끝나면 게임씬으로 전환 (또는 다른 액션)
                 timeRemaining = 0;
+                countdownText.gameObject.SetActive(false);
                 timerIsRunning = false;
                 OnCountdownFinished();
             }
@@ -42,6 +45,6 @@ public class CountdownTimer : MonoBehaviour
 
     void OnCountdownFinished()
     {
-        SceneManager.LoadScene("EndingScene");
+        panel.SetActive(true);
     }
 }
