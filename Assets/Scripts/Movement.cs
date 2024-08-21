@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     [HideInInspector] public BoxCollider2D col;
     public Player pl;
     public bool isRunning, isJumping, isMoving, canMove;
+    public float jumpTime;
 
     [HideInInspector] public Vector3 pos { get { return transform.position; } }
 
@@ -44,6 +45,12 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         isMoving = false;
+
+        if (isJumping) {
+            jumpTime += Time.fixedDeltaTime;
+        } else {
+            jumpTime = 0;
+        }
         
         if (canMove) {
             if (Input.GetKey(KeyCode.A))
@@ -52,6 +59,14 @@ public class Movement : MonoBehaviour
                 isMoving = true;
 
                 pl.facingRight = false;
+
+                if (isJumping && rb.velocity.y >= 3) {
+                    UIManager.Instance.SetActionText("점프 + 왼쪽 가속!", Color.green, false);
+                }
+
+                if (isJumping && jumpTime <= 0.2) {
+                    UIManager.Instance.SetActionText("점프 + 왼쪽 초가속!", Color.yellow);
+                }
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -59,11 +74,27 @@ public class Movement : MonoBehaviour
                 isMoving = true;
 
                 pl.facingRight = true;
+
+                if (isJumping && rb.velocity.y >= 3) {
+                    UIManager.Instance.SetActionText("점프 + 오른쪽 가속!", Color.green, false);
+                }
+
+                if (isJumping && jumpTime <= 0.2) {
+                    UIManager.Instance.SetActionText("점프 + 오른쪽 초가속!", Color.yellow);
+                }
             }
             else if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(0, 0, speed * Time.deltaTime);
                 isMoving = true;
+
+                if (isJumping && rb.velocity.y >= 3) {
+                    UIManager.Instance.SetActionText("점프 + 위쪽 가속!", Color.green, false);
+                }
+
+                if (isJumping && jumpTime <= 0.3) {
+                    UIManager.Instance.SetActionText("점프 + 위쪽 초가속!", Color.yellow);
+                }
             }
             else if (Input.GetKey(KeyCode.S))
             {
