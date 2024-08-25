@@ -1,6 +1,3 @@
-
-
-
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -41,38 +38,46 @@ public class Movement : MonoBehaviour
     }
 
     public float speed = 5f;
+
     void FixedUpdate()
     {
         isMoving = false;
-        
-        if (canMove) {
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(-speed * Time.deltaTime, 0, 0);
-                isMoving = true;
 
+        if (canMove)
+        {
+            //방향전환
+            float moveDirection;
+            if (pl.isFlipped)
+                moveDirection = -1;
+            else
+                moveDirection = 1;
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(-moveDirection * speed * Time.deltaTime, 0, 0);
+                isMoving = true;
                 pl.facingRight = false;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.Translate(speed * Time.deltaTime, 0, 0);
+                transform.Translate(moveDirection * speed * Time.deltaTime, 0, 0);
                 isMoving = true;
-
                 pl.facingRight = true;
             }
-            else if (Input.GetKey(KeyCode.W))
+            else if (Input.GetKey(KeyCode.UpArrow))
             {
                 transform.Translate(0, 0, speed * Time.deltaTime);
                 isMoving = true;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.DownArrow))
             {
                 transform.Translate(0, 0, -speed * Time.deltaTime);
                 isMoving = true;
             }
         }
 
-        if (pl.OnGround() && rb.velocity.y <= 0) {
+        if (pl.OnGround() && rb.velocity.y <= 0)
+        {
             rb.velocity = Vector2.zero;
             isJumping = false;
         }

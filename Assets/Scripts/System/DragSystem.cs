@@ -1,5 +1,3 @@
-
-
 using UnityEngine;
 
 public class DragSystem : MonoBehaviour
@@ -34,6 +32,9 @@ public class DragSystem : MonoBehaviour
     Vector2 force;
     float distance;
 
+    public JumpItem SuperJump;
+    public JumpItem LowJump;
+
     //---------------------------------------
     void Start()
     {
@@ -43,8 +44,10 @@ public class DragSystem : MonoBehaviour
 
     void Update()
     {
-        if (ball.rb.velocity.y <= 0) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
+        if (ball.rb.velocity.y <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 isDragging = true;
                 bySpace = true;
                 OnDragStart();
@@ -61,13 +64,16 @@ public class DragSystem : MonoBehaviour
         {
             OnDrag();
 
-            if (bySpace) {
+            if (bySpace)
+            {
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
                     isDragging = false;
                     OnDragEnd();
                 }
-            } else {
+            }
+            else
+            {
                 if (Input.GetMouseButtonUp(0))
                 {
                     isDragging = false;
@@ -85,6 +91,14 @@ public class DragSystem : MonoBehaviour
         trajectory.Show();
         ball.canMove = false;
         ball.pl.animator.SetBool("isReady", true);
+        if (SuperJump.is_jump && SuperJump.is_effect)
+        {
+            SuperJump.Reset(); //효과 없애는 신호
+        }
+        if (LowJump.is_jump && LowJump.is_effect)
+        {
+            LowJump.Reset(); //효과 없애는 신호
+        }
     }
 
     void OnDrag()
@@ -92,13 +106,17 @@ public class DragSystem : MonoBehaviour
         endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
         distance = Vector2.Distance(startPoint, endPoint);
 
-        if (endPoint.x < startPoint.x) {
+        if (endPoint.x < startPoint.x)
+        {
             ball.pl.facingRight = true;
-        } else {
+        }
+        else
+        {
             ball.pl.facingRight = false;
         }
 
-        if (distance > maxDistance) {
+        if (distance > maxDistance)
+        {
             distance = maxDistance;
         }
 
@@ -107,7 +125,6 @@ public class DragSystem : MonoBehaviour
 
         //just for debug
         Debug.DrawLine(startPoint, endPoint);
-
 
         trajectory.UpdateDots(ball.pos + new Vector3(0, -1), force);
     }
@@ -124,6 +141,12 @@ public class DragSystem : MonoBehaviour
         ball.canMove = true;
 
         trajectory.Hide();
+        if (SuperJump.is_effect) {
+            SuperJump.is_jump = true; //점프한걸로 바꾸기
+        }
+        if (LowJump.is_effect)
+        {
+            LowJump.is_jump = true; //점프한걸로 바꾸기
+        }
     }
-
 }

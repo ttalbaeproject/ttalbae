@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1157047451375712195}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658eb2ffb37dcef4a897a033ad34780d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  render: {fileID: 0}
+  facingRight: 1
+  isFlipped: 0
 --- !u!50 &215480104637667362
 Rigidbody2D:
   serializedVersion: 4
@@ -188,6 +192,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   col: {fileID: 0}
   pl: {fileID: 0}
+  isRunning: 0
+  isJumping: 0
+  isMoving: 0
+  canMove: 0
   speed: 5
 --- !u!95 &1157047451375712195
 Animator:
