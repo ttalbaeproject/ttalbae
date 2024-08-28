@@ -14,7 +14,7 @@ public class FlipItem : Item
     {
         //카매라가져와서효과적용
         mainCamera = Camera.main;
-        originalColor = mainCamera.backgroundColor;
+        originalColor = mainCamera.backgroundColor; //배경 원래색 저장
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -23,7 +23,7 @@ public class FlipItem : Item
         if (collision.collider.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
-            StartCoroutine(Flip(player));
+            StartCoroutine(Flip(player)); //화면전환시작
         }
     }
 
