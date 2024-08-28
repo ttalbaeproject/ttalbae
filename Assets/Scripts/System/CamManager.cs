@@ -27,7 +27,7 @@ public class CamManager : MonoBehaviour
     }
 
     private void Update() {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(Player.Main.transform.position.x, Player.Main.transform.position.y + 2, transform.position.z), 4 * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(Player.Main.transform.position.x, Player.Main.transform.position.y, transform.position.z), 4 * Time.deltaTime);
     }
 
     void ClearRoutine(ref IEnumerator routine) {

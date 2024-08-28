@@ -1,6 +1,3 @@
-
-
-
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -42,6 +39,7 @@ public class Movement : MonoBehaviour
     }
 
     public float speed = 5f;
+
     void FixedUpdate()
     {
         isMoving = false;
@@ -51,13 +49,20 @@ public class Movement : MonoBehaviour
         } else {
             jumpTime = 0;
         }
-        
-        if (canMove) {
+
+        if (canMove)
+        {
+            //������ȯ
+            float moveDirection;
+            if (pl.isFlipped)
+                moveDirection = -1;
+            else
+                moveDirection = 1;
+
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Translate(-speed * Time.deltaTime, 0, 0);
+                transform.Translate(-moveDirection * speed * Time.deltaTime, 0, 0);
                 isMoving = true;
-
                 pl.facingRight = false;
 
                 if (isJumping && rb.velocity.y >= 3) {
@@ -70,9 +75,8 @@ public class Movement : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                transform.Translate(speed * Time.deltaTime, 0, 0);
+                transform.Translate(moveDirection * speed * Time.deltaTime, 0, 0);
                 isMoving = true;
-
                 pl.facingRight = true;
 
                 if (isJumping && rb.velocity.y >= 3) {
@@ -103,7 +107,8 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (pl.OnGround() && rb.velocity.y <= 0) {
+        if (pl.OnGround() && rb.velocity.y <= 0)
+        {
             rb.velocity = Vector2.zero;
             isJumping = false;
         }
