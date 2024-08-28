@@ -1708,13 +1708,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5940460637401267902, guid: bebf2db3b76bc8443b817468d9a64e1b, type: 3}
+      propertyPath: dotSprite
+      value: 
+      objectReference: {fileID: 6446738166247733978}
+    - target: {fileID: 5940460637401267902, guid: bebf2db3b76bc8443b817468d9a64e1b, type: 3}
       propertyPath: trajectory
       value: 
       objectReference: {fileID: 8594971937103203774}
-    - target: {fileID: 5940460637401267902, guid: bebf2db3b76bc8443b817468d9a64e1b, type: 3}
-      propertyPath: gravityScale
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2716,6 +2716,11 @@ PrefabInstance:
 --- !u!4 &6446738166247733977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4630111442079175978, guid: 9282de5479ccfd04385b72c2e2e76702, type: 3}
+  m_PrefabInstance: {fileID: 6446738166247733976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6446738166247733978 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4031970049418162307, guid: 9282de5479ccfd04385b72c2e2e76702, type: 3}
   m_PrefabInstance: {fileID: 6446738166247733976}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6832220171421703222
