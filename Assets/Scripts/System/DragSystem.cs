@@ -43,7 +43,7 @@ public class DragSystem : MonoBehaviour
 
     void Update()
     {
-        if (ball.rb.velocity.y <= 0) {
+        if (ball.pl.OnGround()) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 isDragging = true;
                 bySpace = true;
@@ -110,6 +110,8 @@ public class DragSystem : MonoBehaviour
 
 
         trajectory.UpdateDots(ball.pos + new Vector3(0, -1), force);
+
+        UIManager.Instance.SetActionText("", Color.gray);
     }
 
     void OnDragEnd()
@@ -124,6 +126,8 @@ public class DragSystem : MonoBehaviour
         ball.canMove = true;
 
         trajectory.Hide();
+
+        UIManager.Instance.SetActionText("점프", Color.white);
     }
 
 }
