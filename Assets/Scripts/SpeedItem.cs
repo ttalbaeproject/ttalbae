@@ -19,7 +19,7 @@ public class SpeedItem : Item
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player")) //플래이어부딧혔을때
         {
             Player player = collision.collider.GetComponent<Player>();
             playerMovement = player.GetComponent<Movement>();
@@ -30,8 +30,8 @@ public class SpeedItem : Item
     void Effect(Player player)
     {
         //원래 색상과 속도 저장
-        originalColor = player.render.color;
-        originalSpeed = playerMovement.speed; // 속도 저장
+        originalColor = player.render.color;//색깔저장
+        originalSpeed = playerMovement.speed; //속도 저장
 
         //플레이어의 색상과 속도 변경
         player.render.color = effectColor;
@@ -51,7 +51,7 @@ public class SpeedItem : Item
 
         //색상과 속도를 원래대로 복원
         Player player = Player.Main; //씬의 플레이어를 가져옴        
-            player.render.color = originalColor;
+            player.render.color = originalColor; //원래색으로바꾸기
             playerMovement.speed = originalSpeed;//원래색속도로바뀌기
 
         // 아이템 제거

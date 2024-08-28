@@ -42,8 +42,6 @@ public class Trajectory : MonoBehaviour
             if (scale > dotMinScale)
                 scale -= scaleFactor;
         }
-        
-        
     }
 
     public void UpdateDots(Vector3 ballPos, Vector2 forceApplied)
@@ -67,5 +65,18 @@ public class Trajectory : MonoBehaviour
     public void Hide()
     {
         dotsParent.SetActive(false);
+    }
+
+    //포물선 색상 변경 함수
+    public void SetDotsColor(Color color)
+    {
+        foreach (Transform dot in DotsList)
+        {
+            SpriteRenderer dotRenderer = dot.GetComponent<SpriteRenderer>();
+            if (dotRenderer != null)
+            {
+                dotRenderer.color = color;
+            }
+        }
     }
 }
