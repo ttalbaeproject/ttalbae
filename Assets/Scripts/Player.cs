@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public bool facingRight = true;
     Vector2 scaleDefault;
 
-    public float jumpForce = 10f; // Á¡ÇÁ·Â
+    public float jumpForce = 10f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public bool isFlipped = false;
 
     void Awake()
@@ -23,14 +23,14 @@ public class Player : MonoBehaviour
     }
     public void Jump(Vector2 force)
     {
-        // Á¡ÇÁ·Â Àû¿ë
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GetComponent<Rigidbody2D>().AddForce(force * jumpForce, ForceMode2D.Impulse);
         animator.SetTrigger("jump");
     }
 
     void Update()
     {
-        //¹æÇâÀüÈ¯
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¯
         if (facingRight)
         {
             if (isFlipped)

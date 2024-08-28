@@ -105,6 +105,9 @@ MonoBehaviour:
   render: {fileID: 0}
   facingRight: 1
   isFlipped: 0
+  animator: {fileID: 0}
+  render: {fileID: 0}
+  facingRight: 1
 --- !u!50 &215480104637667362
 Rigidbody2D:
   serializedVersion: 4
