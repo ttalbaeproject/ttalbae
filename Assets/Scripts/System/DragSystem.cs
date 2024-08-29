@@ -21,7 +21,8 @@ public class DragSystem : MonoBehaviour
     public Movement ball;
     public Trajectory trajectory;
     [SerializeField] float pushForce = 4f;
-    [SerializeField] float maxDistance;
+    public float maxDistance;
+    public float defMaxDist;
 
     bool isDragging = false;
     bool bySpace;
@@ -32,14 +33,13 @@ public class DragSystem : MonoBehaviour
     Vector2 force;
     float distance;
 
-    public JumpItem SuperJump;
-    public JumpItem LowJump;
-
     //---------------------------------------
     void Start()
     {
         cam = Camera.main;
         ball.DesactivateRb();
+
+        defMaxDist = maxDistance;
     }
 
     void Update()
@@ -89,14 +89,6 @@ public class DragSystem : MonoBehaviour
         trajectory.Show();
         ball.canMove = false;
         ball.pl.animator.SetBool("isReady", true);
-        if (SuperJump.is_jump && SuperJump.is_effect)
-        {
-            SuperJump.Reset(); //ȿ�� ���ִ� ��ȣ
-        }
-        if (LowJump.is_jump && LowJump.is_effect)
-        {
-            LowJump.Reset(); //ȿ�� ���ִ� ��ȣ
-        }
     }
 
     void OnDrag()
@@ -142,13 +134,5 @@ public class DragSystem : MonoBehaviour
 
         trajectory.Hide();
         UIManager.Instance.SetActionText("점프", Color.white);
-
-        if (SuperJump.is_effect) {
-            SuperJump.is_jump = true; //�����Ѱɷ� �ٲٱ�
-        }
-        if (LowJump.is_effect)
-        {
-            LowJump.is_jump = true; //�����Ѱɷ� �ٲٱ�
-        }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6693682404930706040}
   - component: {fileID: 4667725627559961388}
   - component: {fileID: 7574468317673606977}
-  - component: {fileID: 2252569887093117132}
+  - component: {fileID: 7345354754686899243}
   m_Layer: 0
   m_Name: SpeedUp
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2252569887093117132
+--- !u!114 &7345354754686899243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,9 +158,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1390249879428342259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a41eb13619953924bbc207ed818d963d, type: 3}
+  m_Script: {fileID: 11500000, guid: 458074159667086428c7a616a7e6dd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  effectTime: 10
-  effectColor: {r: 1, g: 0, b: 0, a: 1}

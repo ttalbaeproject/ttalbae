@@ -2,38 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandItem : Item
+public class RandItm : Itm
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    string RandVal() {
+        string[] vals = {
+            "speedUp",
+            "speedDown",
+            "jumpUp"
+        };
 
+        return vals[Random.Range(0, vals.Length)];
+    }
     public override void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
-            // playerRigidbody = player.GetComponent<Rigidbody2D>(); //�÷��̾��� ������ٵ� ��������
+            
+            switch (RandVal())
+            {
+                case "speedUp":
+                    player.effects.Add(new SpeedUpEffect(10));
+                    break;
+                case "speedDown":
+                    player.effects.Add(new SpeedUpEffect(10));
+                    break;
+                case "jumpUp":
+                    player.effects.Add(new JumpUpEffect(10));
+                    break;
+            }
 
-            // //������ �� ���̰Ÿ� ����
-            // trajectory.DotSpacing = DotSpace;
-
-            // //������ �Ÿ� ���̱�
-            // originalPlayerGravity = playerRigidbody.gravityScale;
-            // playerRigidbody.gravityScale = gravityScale;
-
-            // //������ �����
-            // spriteRenderer.enabled = false;
-            // collider.enabled = false;
-            // is_effect = true;
+            Destroy(gameObject);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

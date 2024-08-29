@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6693682404930706040}
   - component: {fileID: 4667725627559961388}
   - component: {fileID: 7574468317673606977}
-  - component: {fileID: 5940460637401267902}
+  - component: {fileID: 2613081296273435662}
   m_Layer: 0
   m_Name: SuperJump
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5940460637401267902
+--- !u!114 &2613081296273435662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,11 +158,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1390249879428342259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480ccc723044e8d4c8bcc0421fbc714b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cd56da8ece77b5428749c8cdeca0839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trajectory: {fileID: 0}
-  is_jump: 0
-  is_effect: 0
-  DotSpace: 0.1
-  gravityScale: 1

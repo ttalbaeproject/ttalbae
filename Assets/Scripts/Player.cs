@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
 
     public float jumpForce = 10f; // ������
     public bool isFlipped = false;
+    public List<Effect> effects = new();
+    List<Effect> removeEffs = new();
+
+    public Color spriteCol;
 
     void Awake()
     {
@@ -20,6 +24,7 @@ public class Player : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
 
         scaleDefault = transform.localScale;
+        spriteCol = render.color;
     }
     public void Jump(Vector2 force)
     {
@@ -30,7 +35,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //������ȯ
         if (facingRight)
         {
             if (isFlipped)
@@ -54,6 +58,29 @@ public class Player : MonoBehaviour
             }
         }
 
+        foreach (Effect eff in effects) {
+            eff.OnUpdate();
+            
+            if (eff.ended) {
+                removeEffs.Add(eff);
+            }
+        }
+
+        foreach (Effect eff in removeEffs) {
+            effects.Remove(eff);
+        }
+
+        removeEffs.Clear();
+    }
+
+    public bool HasEffect(string id) {
+        foreach (Effect eff in effects) {
+            if (eff.Id == id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     bool CheckGround(RaycastHit2D[] casts)
@@ -73,29 +100,13 @@ public class Player : MonoBehaviour
 
     public bool OnGround()
     {
-        RaycastHit2D[] center = Physics2D.RaycastAll(transform.position + new Vector3(0, -0.8f), Vector2.down, 0.2f);
-        RaycastHit2D[] left = Physics2D.RaycastAll(transform.position + new Vector3(-0.3f, -0.8f), Vector2.down, 0.2f);
-        RaycastHit2D[] right = Physics2D.RaycastAll(transform.position + new Vector3(0.3f, -0.8f), Vector2.down, 0.2f);
+        RaycastHit2D[] center = Physics2D.RaycastAll(transform.position + new Vector3(0, -0.6f), Vector2.down, 0.2f);
+        RaycastHit2D[] left = Physics2D.RaycastAll(transform.position + new Vector3(-0.3f, -0.6f), Vector2.down, 0.2f);
+        RaycastHit2D[] right = Physics2D.RaycastAll(transform.position + new Vector3(0.3f, -0.6f), Vector2.down, 0.2f);
 
         bool l = CheckGround(left), c = CheckGround(center), r = CheckGround(right);
 
-        if (l && c && r)
-        {
-            return true;
-        }
-
-        if (l && c)
-        {
-            return true;
-        }
-
-        if (c && r)
-        {
-            return true;
-        }
-
-        if (!l && c && !r)
-        {
+        if (l || c || r) {
             return true;
         }
 

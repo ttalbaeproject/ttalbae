@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         pl = GetComponent<Player>();
+
+        defSpeed = speed;
     }
 
     public void Push(Vector2 force)
@@ -39,6 +41,7 @@ public class Movement : MonoBehaviour
     }
 
     public float speed = 5f;
+    [HideInInspector] public float defSpeed;
 
     void FixedUpdate()
     {

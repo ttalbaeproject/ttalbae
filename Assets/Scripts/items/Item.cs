@@ -1,6 +1,6 @@
 using UnityEngine;
-//����� ����غ����ٰ��ȵǼ� ������ �κ�
-public class Item : MonoBehaviour
+
+public class Itm : MonoBehaviour
 {
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
