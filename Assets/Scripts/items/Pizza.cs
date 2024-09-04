@@ -1,13 +1,22 @@
 using UnityEngine;
 
-public class PizzaItm : Itm
+public class PizzaItm : MonoBehaviour
 {
-    float lifetime;
+    public float lifetime;
+
+    void Start() {
+        GameManager.Instance.pizzas.Add(this);
+    }
 
     void Update() {
         lifetime += Time.deltaTime;
+
+        if (lifetime >= -8 && lifetime < 0) {
+            GameManager.Instance.pizzas.Remove(this);
+            Destroy(gameObject);
+        }
     }
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (lifetime < 0.3f) return;
         if (collision.collider.CompareTag("Player"))
@@ -15,6 +24,7 @@ public class PizzaItm : Itm
             Player player = collision.collider.GetComponent<Player>();
             player.pizza++;
 
+            GameManager.Instance.pizzas.Remove(this);
             Destroy(gameObject);
         }
     }

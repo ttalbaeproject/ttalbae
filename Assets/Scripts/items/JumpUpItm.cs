@@ -9,7 +9,7 @@ public class JumpUpItm : Itm
             Player player = collision.collider.GetComponent<Player>();
             player.effects.Add(new JumpUpEffect(10));
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

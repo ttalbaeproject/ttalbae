@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 public class CountdownTimer : MonoBehaviour
 {
     public Text countdownText;
-    private float timeRemaining = 120f;
+    public static CountdownTimer Instance;
+    public float timeRemaining = 180f;
     private bool timerIsRunning = false;
     public GameObject panel;
 
     void Start()
     {
+        Instance = this;
+
         timerIsRunning = true;
         panel.SetActive(false);
         UpdateCountdownText();
@@ -18,7 +21,7 @@ public class CountdownTimer : MonoBehaviour
 
     void Update()
     {
-        if (timerIsRunning)
+        if (timerIsRunning && GameManager.Instance.IsStarted)
         {
             if (timeRemaining > 0)
             {
@@ -45,6 +48,9 @@ public class CountdownTimer : MonoBehaviour
 
     void OnCountdownFinished()
     {
+        var movement = Player.Main.GetComponent<Movement>();
+        movement.canMove = false;
+        
         panel.SetActive(true);
     }
 }

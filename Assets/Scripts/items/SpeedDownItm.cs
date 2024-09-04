@@ -9,7 +9,7 @@ public class SpeedDownItm : Itm
             Player player = collision.collider.GetComponent<Player>();
             player.effects.Add(new SpeedDownEffect(10));
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

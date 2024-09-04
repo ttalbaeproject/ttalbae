@@ -8,11 +8,12 @@ public class RandItm : Itm
         string[] vals = {
             "speedUp",
             "speedDown",
-            "jumpUp"
+            "jumpUp",
+            "flip"
         };
         
 
-        return vals[Mathf.RoundToInt(Random.Range(0f, vals.Length))];
+        return vals[Mathf.RoundToInt(Random.Range(0f, vals.Length - 1))];
     }
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -31,9 +32,12 @@ public class RandItm : Itm
                 case "jumpUp":
                     player.effects.Add(new JumpUpEffect(10));
                     break;
+                case "flip":
+                    player.effects.Add(new FlipEffect(10));
+                    break;
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
