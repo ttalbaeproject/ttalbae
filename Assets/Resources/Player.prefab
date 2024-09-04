@@ -66,9 +66,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e1ffd7fef028b164db5cb39ce19bce98, type: 3}
     m_FontSize: 58
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 100
@@ -391,7 +391,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
