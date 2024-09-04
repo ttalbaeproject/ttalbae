@@ -3,8 +3,12 @@ using UnityEngine;
 public class SpeedDownEffect : Effect
 {
     public override string Id => "speedDown";
-    public float speed = 2f;
-    public Color effectColor = Color.yellow;
+
+    public override Color effectColor => Color.yellow;
+
+    public override string Name => "속도 감소";
+
+    public float speed = 0.5f;
 
     public SpeedDownEffect(float dur) : base(dur)
     {
@@ -22,7 +26,7 @@ public class SpeedDownEffect : Effect
     {
         var movement = Player.Main.GetComponent<Movement>();
 
-        movement.speed = movement.defSpeed * -speed;
+        movement.speed = movement.defSpeed * speed;
         Player.Main.render.color = effectColor;
     }
 }

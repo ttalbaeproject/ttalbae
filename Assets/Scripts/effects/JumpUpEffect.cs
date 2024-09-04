@@ -3,7 +3,10 @@ using UnityEngine;
 public class JumpUpEffect : Effect
 {
     public override string Id => "jumpUp";
-    public Color effectColor = Color.green;
+
+    public override Color effectColor => Color.green;
+
+    public override string Name => "점프력 증가";
 
     public JumpUpEffect(float dur) : base(dur)
     {

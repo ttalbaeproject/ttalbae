@@ -10,8 +10,9 @@ public class RandItm : Itm
             "speedDown",
             "jumpUp"
         };
+        
 
-        return vals[Random.Range(0, vals.Length)];
+        return vals[Mathf.RoundToInt(Random.Range(0f, vals.Length))];
     }
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -25,7 +26,7 @@ public class RandItm : Itm
                     player.effects.Add(new SpeedUpEffect(10));
                     break;
                 case "speedDown":
-                    player.effects.Add(new SpeedUpEffect(10));
+                    player.effects.Add(new SpeedDownEffect(10));
                     break;
                 case "jumpUp":
                     player.effects.Add(new JumpUpEffect(10));

@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 
     public Color spriteCol;
 
+    public int pizza;
+
     void Awake()
     {
         Main = this;
@@ -119,5 +121,18 @@ public class Player : MonoBehaviour
 
         Gizmos.DrawLine(transform.position + new Vector3(0.3f, -0.8f), transform.position + new Vector3(0.3f, -1f));
         Gizmos.DrawLine(transform.position + new Vector3(-0.3f, -0.8f), transform.position + new Vector3(-0.3f, -1f));
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((LayerMask.GetMask("object") & (1 << collision.gameObject.layer)) != 0)
+        {
+            if (collision.relativeVelocity.y <= -5) {
+                if (pizza > 0) {
+                    GameManager.Instance.DropPizza(transform.position, facingRight ? 1 : -1);
+                    pizza--;
+                }
+            }
+        }
     }
 }

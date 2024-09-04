@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set;}
-    public Text actionText, heightText;
+    public Text actionText, heightText, pizzaText, title;
     public float actionTime;
     void Start()
     {
@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
         }
 
         heightText.text = Mathf.Floor(Player.Main.transform.position.y + 7).ToString() + "M";
+        pizzaText.text = "보유한 피자: " + Player.Main.pizza.ToString() + "개";
     }
 
     public void SetActionText(string txt, Color col, bool overrid = true) {

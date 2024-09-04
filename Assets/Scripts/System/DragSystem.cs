@@ -113,6 +113,8 @@ public class DragSystem : MonoBehaviour
         direction = (startPoint - endPoint).normalized;
         force = direction * distance * pushForce;
 
+        CamManager.main.CloseUp(7 - distance / maxDistance * 1.5f, 0, 0.2f);
+
         //just for debug
         Debug.DrawLine(startPoint, endPoint);
 
@@ -134,5 +136,7 @@ public class DragSystem : MonoBehaviour
 
         trajectory.Hide();
         UIManager.Instance.SetActionText("점프", Color.white);
+
+        CamManager.main.CloseOut(0.2f);
     }
 }

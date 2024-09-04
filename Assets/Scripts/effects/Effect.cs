@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Effect {
     public abstract string Id {get;}
+    public abstract Color effectColor {get;}
+    public abstract string Name {get;}
     float duration, time;
     public bool isIn, ended;
     public Effect(float dur) {

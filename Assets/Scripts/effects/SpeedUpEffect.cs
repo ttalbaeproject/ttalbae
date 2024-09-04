@@ -3,8 +3,12 @@ using UnityEngine;
 public class SpeedUpEffect : Effect
 {
     public override string Id => "speedUp";
-    public float speed = 2f;
-    public Color effectColor = Color.red;
+
+    public override Color effectColor => Color.blue;
+
+    public override string Name => "속도 증가";
+
+    public float speed = 1.3f;
 
     public SpeedUpEffect(float dur) : base(dur)
     {

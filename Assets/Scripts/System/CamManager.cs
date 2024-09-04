@@ -67,11 +67,11 @@ public class CamManager : MonoBehaviour
         if (dur > 0) {
             float dSize = cam.m_Lens.OrthographicSize, dDutch = cam.m_Lens.Dutch;
 
-            for (int i = 1; i <= 10; i++) {
-                cam.m_Lens.OrthographicSize = dSize - (dSize - orSize) / 10 * i;
-                cam.m_Lens.Dutch = dDutch - (dDutch - dutch) / 10 * i;
+            for (int i = 1; i <= 20; i++) {
+                cam.m_Lens.OrthographicSize = dSize - (dSize - orSize) / 20 * i;
+                cam.m_Lens.Dutch = dDutch - (dDutch - dutch) / 20 * i;
 
-                yield return new WaitForSeconds(dur / 10);
+                yield return new WaitForSeconds(dur / 20);
             }
         }
 
@@ -85,11 +85,11 @@ public class CamManager : MonoBehaviour
         if (dur > 0) {
             float dSize = cam.m_Lens.OrthographicSize, dDutch = cam.m_Lens.Dutch;
 
-            for (int i = 1; i <= 10; i++) {
-                cam.m_Lens.OrthographicSize = dSize + (orSize_d - dSize) / 10 * i;
-                cam.m_Lens.Dutch = dDutch + (dutch_d - dDutch) / 10 * i;
+            for (int i = 1; i <= 20; i++) {
+                cam.m_Lens.OrthographicSize = dSize + (orSize_d - dSize) / 20 * i;
+                cam.m_Lens.Dutch = dDutch + (dutch_d - dDutch) / 20 * i;
 
-                yield return new WaitForSeconds(dur / 10);
+                yield return new WaitForSeconds(dur / 20);
             }
         }
         
@@ -103,13 +103,13 @@ public class CamManager : MonoBehaviour
         if (dur > 0) {
             Vector2 beforeOff = camOffset.m_Offset;
 
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 20; i++) {
                 camOffset.m_Offset = new Vector3(
-                    beforeOff.x - (beforeOff.x - off.x) / 10 * i,
-                    beforeOff.y - (beforeOff.y - off.y) / 10 * i
+                    beforeOff.x - (beforeOff.x - off.x) / 20 * i,
+                    beforeOff.y - (beforeOff.y - off.y) / 20 * i
                 );
 
-                yield return new WaitForSeconds(dur / 10);
+                yield return new WaitForSeconds(dur / 20);
             }
         }
 
