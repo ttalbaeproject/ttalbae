@@ -44,7 +44,7 @@ public class DragSystem : MonoBehaviour
 
     void Update()
     {
-        if (ball.pl.OnGround()) {
+        if (ball.pl.OnGround() && ball.canMove) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 isDragging = true;
                 bySpace = true;

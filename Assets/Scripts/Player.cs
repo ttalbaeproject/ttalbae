@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Player : MonoBehaviour
     public Color spriteCol;
 
     public int pizza;
+    float commentTime;
+    public Text commentText;
+    public Image comment;
 
     void Awake()
     {
@@ -28,6 +32,11 @@ public class Player : MonoBehaviour
         scaleDefault = transform.localScale;
         spriteCol = render.color;
     }
+    public void Comment(string text) {
+        commentText.text = text;
+        comment.gameObject.SetActive(true);
+        commentTime = 2.5f;
+    }
     public void Jump(Vector2 force)
     {
         // ������ ����
@@ -37,6 +46,25 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (comment.gameObject.activeSelf) {
+            commentTime -= Time.deltaTime;
+
+            Color col = comment.color;
+            col.a = commentTime;
+
+            comment.color = col;
+
+            if (commentTime <= 0) {
+                comment.gameObject.SetActive(false);
+            }
+
+            if (facingRight) {
+                commentText.transform.localScale = new Vector3(Mathf.Abs(commentText.transform.localScale.x), commentText.transform.localScale.y, commentText.transform.localScale.z);
+            } else {
+                commentText.transform.localScale = new Vector3(-Mathf.Abs(commentText.transform.localScale.x), commentText.transform.localScale.y, commentText.transform.localScale.z);
+            }
+        }
+
         if (facingRight)
         {
             if (isFlipped)

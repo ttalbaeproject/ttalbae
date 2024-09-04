@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
         pizza3.SetActive(false);
 
         Player.Main.facingRight = false;
+        var movement = Player.Main.GetComponent<Movement>();
+        movement.canMove = false;
 
         yield return new WaitForSeconds(1f);
 
@@ -71,12 +73,24 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        Player.Main.Comment("흐아...");
+
         StartCoroutine(dropItem(pizza3, 0.3f));
         yield return new WaitForSeconds(0.4f);
         StartCoroutine(dropItem(pizza2, 0.3f));
         yield return new WaitForSeconds(0.4f);
         StartCoroutine(dropItem(pizza1, 0.3f));
         yield return new WaitForSeconds(1f);
+
+        float rd = Random.Range(0, 100);
+        if (rd <= 30f) 
+            Player.Main.Comment("빨리 돈 벌어서 집 사야지 ㅜㅜ");
+        else if (rd <= 60f) 
+            Player.Main.Comment("오늘도 왜케 많은거야...");
+        else if (rd <= 90f) 
+            Player.Main.Comment("왜 나만 오면 주문만 하는거냐");
+        else
+            Player.Main.Comment("ㅅ발");
 
         ShotPizza();
         yield return new WaitForSeconds(0.5f);
@@ -90,11 +104,12 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        UIManager.Instance.title.text = "Ready...";
+        Player.Main.Comment("준비하시고...");
 
         yield return new WaitForSeconds(1.5f);
 
-        UIManager.Instance.title.text = "시작!";
+        UIManager.Instance.title.text = "GO! GO!";
+        Player.Main.Comment("좋아 가보자고!");
 
         IsStarted = true;
 
@@ -105,11 +120,7 @@ public class GameManager : MonoBehaviour
 
         UIManager.Instance.title.text = "";
 
-        // StartCoroutine(dropItem(pizza2, 0.2f));
-        // yield return new WaitForSeconds(0.2f);
-       
-        // StartCoroutine(dropItem(pizza3, 0.2f));
-        // yield return new WaitForSeconds(0.2f);
+        movement.canMove = true;
        
 
         yield break;
