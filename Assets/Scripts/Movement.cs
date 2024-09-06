@@ -61,6 +61,7 @@ public class Movement : MonoBehaviour
 
         if (canMove)
         {
+            pl.notMove += Time.fixedDeltaTime;
             //������ȯ
             float moveDirection;
             if (pl.isFlipped)
@@ -81,6 +82,8 @@ public class Movement : MonoBehaviour
                 if (isJumping && jumpTime <= 0.2) {
                     UIManager.Instance.SetActionText("점프 + 왼쪽 초가속!", Color.yellow);
                 }
+
+                pl.notMove = 0;
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -95,6 +98,8 @@ public class Movement : MonoBehaviour
                 if (isJumping && jumpTime <= 0.2) {
                     UIManager.Instance.SetActionText("점프 + 오른쪽 초가속!", Color.yellow);
                 }
+
+                pl.notMove = 0;
             }
             else if (Input.GetKey(KeyCode.W))
             {
@@ -108,11 +113,15 @@ public class Movement : MonoBehaviour
                 if (isJumping && jumpTime <= 0.3) {
                     UIManager.Instance.SetActionText("점프 + 위쪽 초가속!", Color.yellow);
                 }
+
+                pl.notMove = 0;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(0, 0, -speed * Time.deltaTime);
                 isMoving = true;
+
+                pl.notMove = 0;
             }
         }
 

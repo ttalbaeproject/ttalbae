@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     void Awake() {
         Instance = this;
     }
-    void Start()
+    public void Start()
     {
         StartCoroutine(cutScene());
     }
@@ -33,6 +34,14 @@ public class GameManager : MonoBehaviour
             playTime += Time.deltaTime;
 
             fullScore = Player.Main.success * 30 + score;
+
+            if (Player.Main.notMove > 50) {
+                UIManager.Instance.title.text = "곧 시작 화면으로 돌아갑니다.";
+            }
+
+            if (Player.Main.notMove > 60) {
+                SceneManager.LoadScene("startScene");
+            }
         }
     }
 
@@ -51,12 +60,14 @@ public class GameManager : MonoBehaviour
         Player.Main.pizza--;
         Player.Main.success++;
 
+        float dist = Mathf.Abs(point.transform.position.x - Player.Main.transform.position.x);
+
         if (point.transform.position.x > Player.Main.transform.position.x) {
-            ShotDummyPizza(1);
+            ShotDummyPizza(1, dist);
         } else if (point.transform.position.x < Player.Main.transform.position.x) {
-            ShotDummyPizza(-1);
+            ShotDummyPizza(-1, dist);
         } else {
-            ShotDummyPizza(0);
+            ShotDummyPizza(0, 0);
         }
 
         if (Points.Count <= 0) {
@@ -118,11 +129,11 @@ public class GameManager : MonoBehaviour
         rb.AddForce(Vector2.up * 2 + Vector2.right * 4, ForceMode2D.Impulse);
     }
 
-    public void ShotDummyPizza(int facing) {
+    public void ShotDummyPizza(int facing, float dist) {
         var piz = Instantiate(pizza, Player.Main.transform.position + new Vector3(0, 1), Quaternion.identity);
         piz.lifetime = -10;
         Rigidbody2D rb = piz.GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector2.up * 3 + Vector2.right * 2, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 3 + Vector2.right * dist, ForceMode2D.Impulse);
     }
 
     public void DropPizza(Vector2 pos, float facing) {
@@ -137,12 +148,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator supplyPizza(HomePoint home) {
         home.stopDetect = true;
-        CountdownTimer.Instance.timeRemaining += 20;
+        CountdownTimer.Instance.timeRemaining += 40;
 
         var movement = Player.Main.GetComponent<Movement>();
         movement.canMove = false;
 
-        UIManager.Instance.title.text = "추가 시간 20초!";
+        UIManager.Instance.title.text = "추가 시간 40초!";
 
         Player.Main.transform.position = Player.Main.startPos;
         Player.Main.facingRight = false;
@@ -175,6 +186,8 @@ public class GameManager : MonoBehaviour
         pizza1.SetActive(false);
         pizza2.SetActive(false);
         pizza3.SetActive(false);
+
+        CountdownTimer.Instance.timeRemaining = CountdownTimer.Instance.timeDefault;
 
         Player.Main.pizza = 0;
         Player.Main.success = 0;

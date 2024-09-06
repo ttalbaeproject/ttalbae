@@ -19,11 +19,13 @@ public class Scene : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("startScene");
     }
 
     public void RetryButton()
     {
-        SceneManager.LoadScene("gameScene");
+        CountdownTimer.Instance.panel.SetActive(false);
+        CountdownTimer.Instance.panel.SetActive(false);
+        GameManager.Instance.Start();
     }
 }

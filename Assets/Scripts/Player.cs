@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public Text commentText;
     public Image comment;
     public Vector2 startPos;
+    public float notMove;
 
     void Awake()
     {
