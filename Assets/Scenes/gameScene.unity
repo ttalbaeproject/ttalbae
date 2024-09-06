@@ -4940,7 +4940,7 @@ MonoBehaviour:
   ball: {fileID: 2134117277}
   trajectory: {fileID: 6037261436398278317}
   pushForce: 4
-  maxDistance: 3.5
+  maxDistance: 3.8
   defMaxDist: 0
 --- !u!4 &622150866391487621
 Transform:

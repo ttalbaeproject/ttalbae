@@ -9,7 +9,6 @@ public class RandItm : Itm
             "speedUp",
             "speedDown",
             "jumpUp",
-            "jumpDown",
             "flip"
         };
         
