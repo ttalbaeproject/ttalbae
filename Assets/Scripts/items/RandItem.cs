@@ -9,6 +9,7 @@ public class RandItm : Itm
             "speedUp",
             "speedDown",
             "jumpUp",
+            "jumpDown",
             "flip"
         };
         
@@ -24,16 +25,19 @@ public class RandItm : Itm
             switch (RandVal())
             {
                 case "speedUp":
-                    player.effects.Add(new SpeedUpEffect(10));
+                    player.AddEffect(new SpeedUpEffect(10));
                     break;
                 case "speedDown":
-                    player.effects.Add(new SpeedDownEffect(10));
+                    player.AddEffect(new SpeedDownEffect(10));
                     break;
                 case "jumpUp":
-                    player.effects.Add(new JumpUpEffect(10));
+                    player.AddEffect(new JumpUpEffect(10));
+                    break;
+                case "jumpDown":
+                    player.AddEffect(new JumpDownEffect(10));
                     break;
                 case "flip":
-                    player.effects.Add(new FlipEffect(10));
+                    player.AddEffect(new FlipEffect(10));
                     break;
             }
 

@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject hud, indicate_mark;
     public Indicator indicator;
     public float actionTime;
+    public Transform effects;
+    public EffectIcon effectIcon;
     void Awake()
     {
         Instance = this;

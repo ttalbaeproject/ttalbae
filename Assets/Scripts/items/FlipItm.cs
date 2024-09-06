@@ -7,7 +7,7 @@ public class FlipItm : Itm
         if (collision.collider.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
-            player.effects.Add(new FlipEffect(10));
+            player.AddEffect(new FlipEffect(10));
 
             gameObject.SetActive(false);
         }

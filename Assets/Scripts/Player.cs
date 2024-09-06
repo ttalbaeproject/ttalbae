@@ -48,6 +48,18 @@ public class Player : MonoBehaviour
         animator.SetTrigger("jump");
     }
 
+    public void AddEffect(Effect eff) {
+        for (int i = 0; i < effects.Count; i++) {
+            if (effects[i].Id == eff.Id) {
+                effects[i].duration += eff.time;
+
+                return;
+            }
+        }
+
+        effects.Add(eff);
+    }
+
     void Update()
     {
         if (comment.gameObject.activeSelf) {
