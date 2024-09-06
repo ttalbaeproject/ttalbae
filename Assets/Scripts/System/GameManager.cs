@@ -178,6 +178,10 @@ public class GameManager : MonoBehaviour
 
         home.stopDetect = false;
         movement.canMove = true;
+
+        foreach (Itm itm in Itm.items) {
+            itm.gameObject.SetActive(true);
+        }
     }
 
     IEnumerator cutScene() {
@@ -186,6 +190,10 @@ public class GameManager : MonoBehaviour
         pizza1.SetActive(false);
         pizza2.SetActive(false);
         pizza3.SetActive(false);
+
+        foreach (Itm itm in Itm.items) {
+            itm.gameObject.SetActive(true);
+        }
 
         CountdownTimer.Instance.timeRemaining = CountdownTimer.Instance.timeDefault;
 
