@@ -19,9 +19,11 @@ public class Player : MonoBehaviour
     public Color spriteCol;
 
     public int pizza;
+    public int success;
     float commentTime;
     public Text commentText;
     public Image comment;
+    public Vector2 startPos;
 
     void Awake()
     {
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
 
         scaleDefault = transform.localScale;
         spriteCol = render.color;
+
+        startPos = transform.position;
     }
     public void Comment(string text) {
         commentText.text = text;
@@ -159,6 +163,22 @@ public class Player : MonoBehaviour
                 if (pizza > 0) {
                     GameManager.Instance.DropPizza(transform.position, facingRight ? 1 : -1);
                     pizza--;
+
+                    if (pizza <= 0) {
+                        Comment("잠깐.. 다 떨어졌어!!!!");
+                    } else {
+                        int rd = Random.Range(0, 100);
+
+                        if (rd <= 30) {
+                            Comment("으앗!");
+                        } else if (rd <= 60) {
+                            Comment("잠깐만!");
+                        } else if (rd <= 90) {
+                            Comment("제발 제발!");
+                        } else {
+                            Comment("걍 때려칠까");
+                        }
+                    }
                 }
             }
         }

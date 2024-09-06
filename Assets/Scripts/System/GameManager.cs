@@ -6,18 +6,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
     public float playTime;
+    public int score;
+    public int fullScore;
 
-    public GameObject pizza;
+    public PizzaItm pizza;
     Vector2 pizzaPos = new(-12.4f, -5.714f);
     [SerializeField] GameObject pizza1;
     [SerializeField] GameObject pizza2;
     [SerializeField] GameObject pizza3;
+    public List<DeliverPoint> Points = new();
+    public List<DeliverPoint> endedPoint = new();
+    public List<PizzaItm> pizzas = new();
 
     public bool IsStarted;
+    void Awake() {
+        Instance = this;
+    }
     void Start()
     {
-        Instance = this;
-
         StartCoroutine(cutScene());
     }
 
@@ -25,7 +31,68 @@ public class GameManager : MonoBehaviour
     {
         if (IsStarted) {
             playTime += Time.deltaTime;
+
+            fullScore = Player.Main.success * 30 + score;
         }
+    }
+
+    public void EnterPoint(DeliverPoint point) {
+        if (Player.Main.pizza <= 0) {
+            Player.Main.Comment("<color=\"red\">피자를 안 들고 왔잖아!!!!!!</color>");
+
+            return;
+        }
+
+        Points.Remove(point);
+        endedPoint.Add(point);
+
+        score += point.point;
+
+        Player.Main.pizza--;
+        Player.Main.success++;
+
+        if (point.transform.position.x > Player.Main.transform.position.x) {
+            ShotDummyPizza(1);
+        } else if (point.transform.position.x < Player.Main.transform.position.x) {
+            ShotDummyPizza(-1);
+        } else {
+            ShotDummyPizza(0);
+        }
+
+        if (Points.Count <= 0) {
+            RepairPoint();
+        }
+
+        EnableNextPoint();
+
+        Player.Main.Comment("자 이제 다음으로 가자!");
+    }
+
+    public void RepairPoint() {
+        foreach (DeliverPoint point in endedPoint) {
+            Points.Add(point);
+        }
+
+        endedPoint.Clear();
+
+        foreach (DeliverPoint point in Points) {
+            point.gameObject.SetActive(false);
+        }
+        foreach (DeliverPoint point in endedPoint) {
+            point.gameObject.SetActive(false);
+        }
+    }
+
+    public void EnableNextPoint() {
+        foreach (DeliverPoint p in Points) {
+            p.gameObject.SetActive(false);
+        }
+        foreach (DeliverPoint p in endedPoint) {
+            p.gameObject.SetActive(false);
+        }
+
+        var point = Points[Mathf.RoundToInt(Random.Range(0f, Points.Count - 1))];
+        point.gameObject.SetActive(true);
     }
 
     IEnumerator dropItem(GameObject obj, float time) {
@@ -51,22 +118,78 @@ public class GameManager : MonoBehaviour
         rb.AddForce(Vector2.up * 2 + Vector2.right * 4, ForceMode2D.Impulse);
     }
 
+    public void ShotDummyPizza(int facing) {
+        var piz = Instantiate(pizza, Player.Main.transform.position + new Vector3(0, 1), Quaternion.identity);
+        piz.lifetime = -10;
+        Rigidbody2D rb = piz.GetComponent<Rigidbody2D>();
+        rb.AddForce(Vector2.up * 3 + Vector2.right * 2, ForceMode2D.Impulse);
+    }
+
     public void DropPizza(Vector2 pos, float facing) {
         var piz = Instantiate(pizza, pos, Quaternion.identity);
         Rigidbody2D rb = piz.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * 2 + Vector2.right * 4 * facing, ForceMode2D.Impulse);
     }
 
+    public void SupplyPizza(HomePoint home) {
+        StartCoroutine(supplyPizza(home));
+    }
+
+    IEnumerator supplyPizza(HomePoint home) {
+        home.stopDetect = true;
+        CountdownTimer.Instance.timeRemaining += 20;
+
+        var movement = Player.Main.GetComponent<Movement>();
+        movement.canMove = false;
+
+        UIManager.Instance.title.text = "추가 시간 20초!";
+
+        Player.Main.transform.position = Player.Main.startPos;
+        Player.Main.facingRight = false;
+
+        CamManager.main.Offset(new Vector2(-0.86f, 1.4f), 0.3f);
+        CamManager.main.CloseUp(3, 0, 0.3f);
+
+        yield return new WaitForSeconds(0.4f);
+        ShotPizza();
+        yield return new WaitForSeconds(0.5f);
+        ShotPizza();
+        yield return new WaitForSeconds(0.5f);
+        ShotPizza();
+        yield return new WaitForSeconds(0.5f);
+
+        UIManager.Instance.title.text = "";
+
+        Player.Main.facingRight = true;
+
+        CamManager.main.Offset(Vector2.zero, 0.3f);
+        CamManager.main.CloseOut(0.3f);
+
+        home.stopDetect = false;
+        movement.canMove = true;
+    }
+
     IEnumerator cutScene() {
+        IsStarted = false;
+
         pizza1.SetActive(false);
         pizza2.SetActive(false);
         pizza3.SetActive(false);
 
+        Player.Main.pizza = 0;
+        Player.Main.success = 0;
+
+        Player.Main.transform.position = Player.Main.startPos;
         Player.Main.facingRight = false;
         var movement = Player.Main.GetComponent<Movement>();
         movement.canMove = false;
 
+        UIManager.Instance.hud.SetActive(false);
+        UIManager.Instance.indicate_mark.SetActive(false);
+
         yield return new WaitForSeconds(1f);
+
+        RepairPoint();
 
         CamManager.main.Offset(new Vector2(-0.86f, 1.4f), 1);
         CamManager.main.CloseUp(3, 0, 1);
@@ -111,10 +234,15 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.title.text = "GO! GO!";
         Player.Main.Comment("좋아 가보자고!");
 
+        UIManager.Instance.hud.SetActive(true);
+        UIManager.Instance.indicate_mark.SetActive(true);
+
         IsStarted = true;
 
         CamManager.main.Offset(Vector2.zero, 0.5f);
         CamManager.main.CloseOut(0.5f);
+
+        EnableNextPoint();
 
         yield return new WaitForSeconds(1.5f);
 

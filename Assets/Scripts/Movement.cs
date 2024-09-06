@@ -53,6 +53,12 @@ public class Movement : MonoBehaviour
             jumpTime = 0;
         }
 
+        if (transform.position.x < -15.6f) {
+            transform.position = new Vector3(-15.6f, transform.position.y);
+        } else if (transform.position.x > 13.4f) {
+            transform.position = new Vector3(13.4f, transform.position.y);
+        }
+
         if (canMove)
         {
             //������ȯ
