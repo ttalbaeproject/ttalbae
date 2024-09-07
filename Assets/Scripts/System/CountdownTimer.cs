@@ -55,12 +55,21 @@ public class CountdownTimer : MonoBehaviour
         movement.canMove = false;
 
         string name = PlayerPrefs.GetString("PlayerName");
-        
-        Ranking.data.Add(new RankData(){
-            name = name,
-            deliver = Player.Main.success,
-            score = GameManager.Instance.fullScore,
-        });
+
+        var before = Ranking.data.Find((v)=>v.name == name);
+
+        if (before != null) {
+            if (before.score < GameManager.Instance.fullScore) {
+                before.score = GameManager.Instance.fullScore;
+                before.deliver = Player.Main.success;
+            }
+        } else {
+            Ranking.data.Add(new RankData(){
+                name = name,
+                deliver = Player.Main.success,
+                score = GameManager.Instance.fullScore,
+            });
+        }
 
         SoundManager.Instance.Play("music.menu");
 

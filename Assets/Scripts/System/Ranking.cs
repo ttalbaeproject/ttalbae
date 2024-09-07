@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct RankData {
+public class RankData {
     public string name;
     public int score;
     public int deliver;
