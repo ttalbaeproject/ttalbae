@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public Sprite good, bad;
     public Vector2 startPos;
     public float notMove;
+    public GameObject jumpEff;
 
     void Awake()
     {

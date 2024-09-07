@@ -125,18 +125,26 @@ public class DragSystem : MonoBehaviour
 
     void OnDragEnd()
     {
-        //push the ball
         ball.ActivateRb();
-
-        ball.Push(force);
-
         ball.pl.animator.SetBool("isReady", false);
+        trajectory.Hide();
+
+        CamManager.main.CloseOut(0.2f);
 
         ball.canMove = true;
 
-        trajectory.Hide();
-        UIManager.Instance.SetActionText("점프", Color.white);
+        Debug.Log(distance);
 
-        CamManager.main.CloseOut(0.2f);
+        if (distance / maxDistance > 0.2f) {
+            ball.Push(force);
+
+            UIManager.Instance.SetActionText("점프", Color.white);
+
+            SoundManager.Instance.Play("sfx.jump");
+
+            var eff = Instantiate(ball.pl.jumpEff, ball.transform.position + new Vector3(0, 0.5f), Quaternion.identity);
+            eff.AddComponent<SetLayer>().sortingLayer = "particle";
+            Destroy(eff.gameObject, 1);
+        }
     }
 }
