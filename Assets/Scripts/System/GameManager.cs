@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
-    public float playTime;
+    public float playTime, deliverTime;
     public int score;
     public int fullScore;
 
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pizza1;
     [SerializeField] GameObject pizza2;
     [SerializeField] GameObject pizza3;
+    public Npc npc;
     public List<DeliverPoint> Points = new();
     public List<DeliverPoint> endedPoint = new();
     public List<PizzaItm> pizzas = new();
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         if (IsStarted) {
             playTime += Time.deltaTime;
+            deliverTime += Time.deltaTime;
 
             fullScore = Player.Main.success * 30 + score;
 
@@ -55,7 +57,9 @@ public class GameManager : MonoBehaviour
         Points.Remove(point);
         endedPoint.Add(point);
 
-        score += point.point;
+        score += (int)(point.point - deliverTime * 0.05f);
+
+        deliverTime = 0;
 
         Player.Main.pizza--;
         Player.Main.success++;
@@ -196,9 +200,11 @@ public class GameManager : MonoBehaviour
         }
 
         CountdownTimer.Instance.timeRemaining = CountdownTimer.Instance.timeDefault;
+        CountdownTimer.Instance.timerIsRunning = true;
 
         Player.Main.pizza = 0;
         Player.Main.success = 0;
+        score = 0;
 
         Player.Main.transform.position = Player.Main.startPos;
         Player.Main.facingRight = false;

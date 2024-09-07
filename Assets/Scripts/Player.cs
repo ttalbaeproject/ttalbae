@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
 
     public int pizza;
     public int success;
-    float commentTime;
+    float commentTime, effTime;
     public Text commentText;
     public Image comment;
+    public SpriteRenderer effIndi;
+    public Sprite good, bad;
     public Vector2 startPos;
     public float notMove;
 
@@ -42,6 +44,14 @@ public class Player : MonoBehaviour
         comment.gameObject.SetActive(true);
         commentTime = 2.5f;
     }
+    public void EffectIndicate(Sprite img) {
+        effIndi.sprite = img;
+        effIndi.gameObject.SetActive(true);
+        effTime = 2f;
+
+        effIndi.transform.localPosition = new Vector3(0, 0.6f);
+        LeanTween.moveLocalY(effIndi.gameObject, 0.8f, 2.5f);
+    }
     public void Jump(Vector2 force)
     {
         // ������ ����
@@ -54,11 +64,13 @@ public class Player : MonoBehaviour
             if (effects[i].Id == eff.Id) {
                 effects[i].duration += eff.time;
 
+                eff.End();
                 return;
             }
         }
 
         effects.Add(eff);
+        eff.OnStart();
     }
 
     void Update()
@@ -79,6 +91,23 @@ public class Player : MonoBehaviour
                 commentText.transform.localScale = new Vector3(Mathf.Abs(commentText.transform.localScale.x), commentText.transform.localScale.y, commentText.transform.localScale.z);
             } else {
                 commentText.transform.localScale = new Vector3(-Mathf.Abs(commentText.transform.localScale.x), commentText.transform.localScale.y, commentText.transform.localScale.z);
+            }
+        }
+
+        if (effIndi.gameObject.activeSelf) {
+            effTime -= Time.deltaTime;
+
+            Color col = effIndi.color;
+            col.a = effTime;
+
+            if (col.a > 0.5f) {
+                col.a = 0.5f;
+            }
+
+            effIndi.color = col;
+
+            if (effTime <= 0) {
+                effIndi.gameObject.SetActive(false);
             }
         }
 

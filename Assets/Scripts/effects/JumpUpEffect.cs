@@ -20,7 +20,15 @@ public class JumpUpEffect : Effect
 
     public override void OnStart()
     {
+        foreach (Effect eff in Player.Main.effects) {
+            if (eff.Id == "jumpLow") {
+                eff.End();
+            }
+        }
+
         DragSystem.Instance.maxDistance = DragSystem.Instance.defMaxDist * 1.3f;
         Player.Main.render.color = effectColor;
+        
+        Player.Main.EffectIndicate(Player.Main.good);
     }
 }

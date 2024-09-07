@@ -18,8 +18,6 @@ public abstract class Effect {
 
         icon.img.color = effectColor;
         icon.effName.text = Name;
-
-        OnStart();
     }
 
     public abstract void OnStart();
@@ -32,13 +30,17 @@ public abstract class Effect {
             icon.time_col.fillAmount = time / duration;
 
             if (time > duration) {
-                isIn = false;
-                ended = true;
-
-                GameObject.Destroy(icon.gameObject);
-
-                OnEnd();
+                End();
             }
         }
+    }
+
+    public void End() {
+        isIn = false;
+        ended = true;
+
+        GameObject.Destroy(icon.gameObject);
+
+        OnEnd();
     }
 }

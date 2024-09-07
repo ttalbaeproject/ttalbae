@@ -9,7 +9,7 @@ public class CountdownTimer : MonoBehaviour
     public static CountdownTimer Instance;
     public float timeDefault;
     public float timeRemaining;
-    private bool timerIsRunning = false;
+    public bool timerIsRunning;
     public GameObject panel;
     public Image img;
     public Text deliverTxt, scoreTxt;
@@ -19,7 +19,6 @@ public class CountdownTimer : MonoBehaviour
     {
         Instance = this;
 
-        timerIsRunning = true;
         panel.SetActive(false);
         UpdateCountdownText();
     }
@@ -37,7 +36,6 @@ public class CountdownTimer : MonoBehaviour
             {
                 // 타이머가 끝나면 게임씬으로 전환 (또는 다른 액션)
                 timeRemaining = 0;
-                countdownText.gameObject.SetActive(false);
                 timerIsRunning = false;
                 OnCountdownFinished();
             }

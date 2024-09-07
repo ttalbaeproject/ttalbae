@@ -28,5 +28,7 @@ public class FlipEffect : Effect
 
         movement.speed = movement.defSpeed * speed;
         Player.Main.render.color = effectColor;
+        
+        Player.Main.EffectIndicate(Player.Main.bad);
     }
 }

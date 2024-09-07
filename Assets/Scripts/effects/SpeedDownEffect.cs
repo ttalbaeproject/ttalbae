@@ -24,9 +24,17 @@ public class SpeedDownEffect : Effect
 
     public override void OnStart()
     {
+        foreach (Effect eff in Player.Main.effects) {
+            if (eff.Id == "speedUp") {
+                eff.End();
+            }
+        }
+
         var movement = Player.Main.GetComponent<Movement>();
 
         movement.speed = movement.defSpeed * speed;
         Player.Main.render.color = effectColor;
+        
+        Player.Main.EffectIndicate(Player.Main.bad);
     }
 }

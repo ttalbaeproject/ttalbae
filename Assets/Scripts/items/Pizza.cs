@@ -13,6 +13,7 @@ public class PizzaItm : MonoBehaviour
 
         if (lifetime >= -8 && lifetime < 0) {
             GameManager.Instance.pizzas.Remove(this);
+            Instantiate(GameManager.Instance.npc, transform.position + new Vector3(0, 0.5f), Quaternion.identity);
             Destroy(gameObject);
         }
     }
