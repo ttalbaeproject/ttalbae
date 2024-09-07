@@ -22,10 +22,14 @@ public class StartManager : MonoBehaviour
     }
 
     public void SelectStart() {
+        SoundManager.Instance.Play("sfx.start");
+
         StartCoroutine(changeMotion());
     }
 
     public void StartStart() {
+        SoundManager.Instance.Play("sfx.click");
+
         string name = nameInput.text;
 
         if (name == "clear") {
@@ -42,7 +46,7 @@ public class StartManager : MonoBehaviour
 
         PlayerPrefs.SetString("PlayerName", name);
 
-        SceneManager.LoadScene("gameScene");
+        LoadingController.LoadScene("gameScene");
     }
 
     IEnumerator changeMotion() {
@@ -57,6 +61,8 @@ public class StartManager : MonoBehaviour
     }
 
     public void HideRank() {
+        SoundManager.Instance.Play("sfx.click");
+
         StartCoroutine(hideMotion());
     }
 

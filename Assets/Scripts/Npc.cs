@@ -11,6 +11,8 @@ public class Npc : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetTrigger("pickup");
         animator.SetBool("holding", true);
+
+        SoundManager.Instance.Play("sfx.npc");
     }
 
     // Update is called once per frame

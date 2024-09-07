@@ -19,7 +19,10 @@ public class Scene : MonoBehaviour
 
     public void Quit()
     {
-        SceneManager.LoadScene("startScene");
+        Time.timeScale = 1;
+        LoadingController.LoadScene("startScene");
+
+        Itm.items.Clear();
     }
 
     public void RetryButton()
@@ -27,5 +30,7 @@ public class Scene : MonoBehaviour
         CountdownTimer.Instance.panel.SetActive(false);
         CountdownTimer.Instance.panel.SetActive(false);
         GameManager.Instance.Start();
+
+        SoundManager.Instance.Play("music.sfx");
     }
 }

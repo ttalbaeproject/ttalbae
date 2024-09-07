@@ -8,9 +8,11 @@ public class JumpDownItm : Itm
         {
             Player player = collision.collider.GetComponent<Player>();
             
-            player.AddEffect(new JumpDownEffect(10));
+            player.AddEffect(new JumpDownEffect(5));
 
             gameObject.SetActive(false);
+
+            SoundManager.Instance.Play("sfx.item");
         }
     }
 }

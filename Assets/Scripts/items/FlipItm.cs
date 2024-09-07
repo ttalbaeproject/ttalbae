@@ -10,6 +10,8 @@ public class FlipItm : Itm
             player.AddEffect(new FlipEffect(10));
 
             gameObject.SetActive(false);
+
+            SoundManager.Instance.Play("sfx.item");
         }
     }
 }

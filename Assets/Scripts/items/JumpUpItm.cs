@@ -10,6 +10,8 @@ public class JumpUpItm : Itm
             player.AddEffect(new JumpUpEffect(10));
 
             gameObject.SetActive(false);
+
+            SoundManager.Instance.Play("sfx.item");
         }
     }
 }

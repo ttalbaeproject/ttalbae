@@ -65,8 +65,10 @@ public class Player : MonoBehaviour
             if (effects[i].Id == eff.Id) {
                 effects[i].duration += eff.time;
 
-                eff.End();
-                return;
+                eff.duration += effects[i].duration;
+
+                effects[i].ended = true;
+                Destroy(effects[i].icon.gameObject);
             }
         }
 
@@ -206,6 +208,8 @@ public class Player : MonoBehaviour
                 if (pizza > 0) {
                     GameManager.Instance.DropPizza(transform.position, facingRight ? 1 : -1);
                     pizza--;
+
+                    SoundManager.Instance.Play("sfx.dropPizza");
 
                     if (pizza <= 0) {
                         Comment("잠깐.. 다 떨어졌어!!!!");

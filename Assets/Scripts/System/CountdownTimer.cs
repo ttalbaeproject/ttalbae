@@ -62,6 +62,8 @@ public class CountdownTimer : MonoBehaviour
             score = GameManager.Instance.fullScore,
         });
 
+        SoundManager.Instance.Play("music.menu");
+
         Ranking.Store();
 
         deliverTxt.text = "성공한 배달: " + Player.Main.success + "회";

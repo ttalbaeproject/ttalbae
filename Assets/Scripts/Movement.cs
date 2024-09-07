@@ -59,9 +59,10 @@ public class Movement : MonoBehaviour
             transform.position = new Vector3(13.4f, transform.position.y);
         }
 
+        pl.notMove += Time.fixedDeltaTime;
+
         if (canMove)
         {
-            pl.notMove += Time.fixedDeltaTime;
             //������ȯ
             float moveDirection;
             if (pl.isFlipped)

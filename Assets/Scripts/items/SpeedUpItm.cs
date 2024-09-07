@@ -10,6 +10,8 @@ public class SpeedUpItm : Itm
             player.effects.Add(new SpeedUpEffect(10));
 
             gameObject.SetActive(false);
+
+            SoundManager.Instance.Play("sfx.item");
         }
     }
 }

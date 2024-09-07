@@ -41,6 +41,8 @@ public class RandItm : Itm
             }
 
             gameObject.SetActive(false);
+
+            SoundManager.Instance.Play("sfx.item");
         }
     }
 }

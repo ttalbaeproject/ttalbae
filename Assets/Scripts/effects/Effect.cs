@@ -6,7 +6,7 @@ public abstract class Effect {
     public abstract string Name {get;}
     public float duration, time;
     public bool isIn, ended;
-    EffectIcon icon;
+    public EffectIcon icon;
 
     public Effect(float dur) {
         duration = dur;

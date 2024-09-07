@@ -25,6 +25,10 @@ public class PizzaItm : MonoBehaviour
             Player player = collision.collider.GetComponent<Player>();
             player.pizza++;
 
+            if (GameManager.Instance.IsStarted) {
+                SoundManager.Instance.Play("sfx.drop");
+            }
+
             GameManager.Instance.pizzas.Remove(this);
             Destroy(gameObject);
         }

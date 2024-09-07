@@ -125,12 +125,16 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(time / 20);
         }
+
+        SoundManager.Instance.Play("sfx.click");
     }
 
     void ShotPizza() {
         var piz = Instantiate(pizza, pizzaPos, Quaternion.identity);
         Rigidbody2D rb = piz.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * 2 + Vector2.right * 4, ForceMode2D.Impulse);
+
+        SoundManager.Instance.Play("sfx.drop");
     }
 
     public void ShotDummyPizza(int facing, float dist) {
@@ -189,11 +193,16 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator cutScene() {
+        yield return null;
+        yield return null;
+
         IsStarted = false;
 
         pizza1.SetActive(false);
         pizza2.SetActive(false);
         pizza3.SetActive(false);
+
+        SoundManager.Instance.Stop(4);
 
         foreach (Itm itm in Itm.items) {
             itm.gameObject.SetActive(true);
@@ -248,7 +257,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ShotPizza();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
+
+        UIManager.Instance.ShowTuto(1);
+        SoundManager.Instance.Play("sfx.tuto");
+
+        while (UIManager.Instance.inTuto) {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
 
         Player.Main.facingRight = true;
 
@@ -268,6 +286,8 @@ public class GameManager : MonoBehaviour
 
         CamManager.main.Offset(Vector2.zero, 0.5f);
         CamManager.main.CloseOut(0.5f);
+
+        SoundManager.Instance.Play("music.funny");
 
         EnableNextPoint();
 
