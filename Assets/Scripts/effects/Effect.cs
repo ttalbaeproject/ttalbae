@@ -27,7 +27,9 @@ public abstract class Effect {
         if (isIn) {
             time += Time.deltaTime;
 
-            icon.time_col.fillAmount = time / duration;
+            if (icon != null) {
+                icon.time_col.fillAmount = time / duration;
+            }
 
             if (time > duration) {
                 End();
@@ -39,7 +41,10 @@ public abstract class Effect {
         isIn = false;
         ended = true;
 
-        GameObject.Destroy(icon.gameObject);
+        if (icon != null) {
+            GameObject.Destroy(icon.gameObject);
+            icon = null;
+        }
 
         OnEnd();
     }

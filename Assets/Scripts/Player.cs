@@ -68,7 +68,11 @@ public class Player : MonoBehaviour
                 eff.duration += effects[i].duration;
 
                 effects[i].ended = true;
-                Destroy(effects[i].icon.gameObject);
+
+                if (effects[i] != null) {
+                    Destroy(effects[i].icon.gameObject);
+                    effects[i].icon = null;
+                }
             }
         }
 
