@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StartManager : MonoBehaviour
 {
-    public GameObject btn1, btn2, background, title, content, rankingPanel;
+    public GameObject btn1, btn2, btn3, background, title, content, rankingPanel, creditPanel;
     public RankPerson rankPerson;
     public InputField nameInput;
     void Start()
@@ -19,6 +19,24 @@ public class StartManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ShowCredit() {
+        btn1.SetActive(false);
+        btn2.SetActive(false);
+        btn3.SetActive(false);
+        title.SetActive(false);
+
+        creditPanel.SetActive(true);
+    }
+
+    public void HideCredit() {
+        btn1.SetActive(true);
+        btn2.SetActive(true);
+        btn3.SetActive(true);
+        title.SetActive(true);
+
+        creditPanel.SetActive(false);
     }
 
     public void SelectStart() {
@@ -52,6 +70,7 @@ public class StartManager : MonoBehaviour
     IEnumerator changeMotion() {
         btn1.SetActive(false);
         btn2.SetActive(false);
+        btn3.SetActive(false);
         title.SetActive(false);
 
         LeanTween.scaleX(background, -1, 0.6f).setEaseOutElastic();
@@ -69,6 +88,7 @@ public class StartManager : MonoBehaviour
     IEnumerator hideMotion() {
         btn1.SetActive(false);
         btn2.SetActive(false);
+        btn3.SetActive(false);
         title.SetActive(false);
         rankingPanel.SetActive(false);
 
@@ -77,6 +97,7 @@ public class StartManager : MonoBehaviour
 
         btn1.SetActive(true);
         btn2.SetActive(true);
+        btn3.SetActive(true);
         title.SetActive(true);
     }
 

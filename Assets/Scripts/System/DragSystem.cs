@@ -133,8 +133,6 @@ public class DragSystem : MonoBehaviour
 
         ball.canMove = true;
 
-        Debug.Log(distance);
-
         if (distance / maxDistance > 0.2f) {
             ball.Push(force);
 

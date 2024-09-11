@@ -12,7 +12,7 @@ public class CountdownTimer : MonoBehaviour
     public bool timerIsRunning;
     public GameObject panel;
     public Image img;
-    public Text deliverTxt, scoreTxt;
+    public Text deliverTxt, scoreTxt, rankText, cmtText, bestText;
     public Button btn1, btn2;
 
     void Start()
@@ -56,25 +56,42 @@ public class CountdownTimer : MonoBehaviour
 
         string name = PlayerPrefs.GetString("PlayerName");
 
+        RankData myData;
+
         var before = Ranking.data.Find((v)=>v.name == name);
+
+        myData = before;
+
+        cmtText.text = "";
 
         if (before != null) {
             if (before.score < GameManager.Instance.fullScore) {
                 before.score = GameManager.Instance.fullScore;
                 before.deliver = Player.Main.success;
+
+                cmtText.text = "<color=\"green\">신기록!</color>";
             }
         } else {
-            Ranking.data.Add(new RankData(){
+            myData = new RankData(){
                 name = name,
                 deliver = Player.Main.success,
                 score = GameManager.Instance.fullScore,
-            });
+            };
+
+            Ranking.data.Add(myData);
+
+            cmtText.text = "<color=\"red\">첫기록!</color>";
         }
 
         SoundManager.Instance.Play("music.menu");
 
         Ranking.Store();
 
+        var sorted = Ranking.data;
+        sorted.Sort((a, b)=>b.score.CompareTo(a.score));
+
+        bestText.text = "내 BEST 성과: " + (before != null ? before.score : 0) + "pt";
+        rankText.text = "현재 순위: " + (sorted.IndexOf(myData) + 1).ToString() + "위";
         deliverTxt.text = "성공한 배달: " + Player.Main.success + "회";
         scoreTxt.text = "내 성과: " + GameManager.Instance.fullScore + "pt";
         
@@ -86,13 +103,12 @@ public class CountdownTimer : MonoBehaviour
     }
 
     IEnumerator anim() {
-        for (int i = 0; i <= 40; i++) {
+        for (int i = 0; i <= 50; i++) {
             Color colImg = img.color;
-            colImg.a = i / 40f;
+            colImg.a = i / 50f;
 
             img.color = colImg;
-            deliverTxt.color = colImg;
-            scoreTxt.color = colImg;
+            deliverTxt.color = scoreTxt.color = colImg;
 
             yield return new WaitForSeconds(0.05f);
         }

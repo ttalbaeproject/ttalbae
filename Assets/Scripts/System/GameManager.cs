@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
             if (Player.Main.notMove > 50) {
                 UIManager.Instance.title.text = "곧 시작 화면으로 돌아갑니다.";
+            } else if (UIManager.Instance.title.text == "곧 시작 화면으로 돌아갑니다.") {
+                UIManager.Instance.title.text = "";
             }
 
             if (Player.Main.notMove > 60) {
