@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
 
         page = pg;
 
+        pageText.text = page.ToString() + " / 3";
+
         if (page == 1) {
             tutoImage.sprite = tuto1;
             tutoText.text = "A, D를 눌러 좌, 우로 이동할 수 있습니다.";
